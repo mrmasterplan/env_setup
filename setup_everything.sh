@@ -3,6 +3,8 @@
 # [ x"$LOCALNAME" == x"MyMacBookPro" ] determines this to be my MBP
 # [ x"$LOCALNAME" == x"MyMacBookPro" ] determines this to be my MBP
 
+echo "Setting up your environment."
+
 # Set up the shell so that it behaves nicely
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
