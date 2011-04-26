@@ -29,7 +29,7 @@ export mdjmac="simon@imac.mdj.dk"
 alias lx='ssh -X -Y $lxplus'
 alias mac='ssh -X -Y $mdjmac'
 alias wg="ssh -X -Y $wgserv"
-alias ll='ls -lG'
+# alias ll='ls -lG'
 alias la='ls -laG'
 alias lh='ls -lhG'
 alias ls="ls -G"
@@ -53,7 +53,10 @@ export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
 # Make screen nicer
 if [ x"$(readlink ~/.screenrc)" != x$ENV_SETUP_DIR/gnuscreen/screenrc ]
 then
-	echo "Backing up your ~/.screenrc to use my own."
-	mv ~/.screenrc ~/.screenec.backup
+	if [ -e ~/.screenrc ]
+	then
+		echo "Backing up your ~/.screenrc to use my own."
+		mv ~/.screenrc ~/.screenec.backup
+	fi
 	ln -s $ENV_SETUP_DIR/gnuscreen/screenrc ~/.screenrc
 fi
