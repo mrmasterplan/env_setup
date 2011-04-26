@@ -1,0 +1,6 @@
+
+
+	Collection of setup scripts to unify and facilitate daily work on unix systems.
+	
+	IMPORTANT: If the locatin of env_setup is NOT ~/.env_setup, pease specify it
+	by setting ENV_SETUP_DIR before sourcing setup_everything.sh

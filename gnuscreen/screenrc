@@ -1,0 +1,5 @@
+termcapinfo xterm* ti@:te@
+startup_message off
+escape ^Pp
+vbell off
+autodetach on
