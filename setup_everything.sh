@@ -1,9 +1,10 @@
 #!/bin/bash
 
-if [ x"$ENV_SETUP_DIR" == x ]
-then
-	export ENV_SETUP_DIR="$HOME/.env_setup"
-fi
+#Find out where you are, so you know where to import from.
+OLDDIR=$PWD
+cd $(dirname $BASH_SOURCE)
+export ENV_SETUP_DIR="$(pwd -P)"
+cd $OLDDIR
 
 echo "Setting up your environment from $ENV_SETUP_DIR"
 
@@ -29,11 +30,36 @@ export mdjmac="simon@imac.mdj.dk"
 alias lx='ssh -X -Y $lxplus'
 alias mac='ssh -X -Y $mdjmac'
 alias wg="ssh -X -Y $wgserv"
-# alias ll='ls -lG'
-alias la='ls -laG'
-alias lh='ls -lhG'
-alias ls="ls -G"
-alias py="python"
+alias ll='ls -lG'
+alias root='root -l'
+alias '2up=psnup -pa4 -2'
+alias 'a=alias'
+alias 'cp=cp -i'
+alias 'df=df -h'
+alias 'du=du -h'
+alias 'du1=du --max-depth=1'
+alias 'du2=du --max-depth=2'
+alias "py=python"
+alias 'e=emacs --no-site-file -nw' 
+alias 'h=history'
+alias 'l=ls -FlhG'
+alias 'l.=ls -dhG .*'
+alias 'la=ls -lAG'
+alias 'll=ls -lG'
+alias 'lh=ls -lhG'
+alias 'ls=ls -G'
+alias 'lsa=ls -A'
+alias 'mv=mv -i'
+alias 'purge=rm -f *~ .*~ #* *#'
+alias 'purgeall=purge;purgetex;purgemf'
+alias 'purgetex=rm -if *.toc *.aux *.log'
+alias 't=tree'
+alias 'td=tree -d'
+alias 'tree=tree -C'
+alias 'up=cd ..'
+alias 'find=find . -name'
+alias ttop='top -U $USER'
+
 
 #Stuff that is specifit to my Mac
 if [ x"$LOCALNAME" == x"MyMacBookPro" ]; then
@@ -46,17 +72,14 @@ alias delete='/bin/rm'
 . $ENV_SETUP_DIR/bash_scripts/cleanemacs.sh
 . $ENV_SETUP_DIR/bash_scripts/mkcd.sh
 . $ENV_SETUP_DIR/bash_scripts/fullls.sh
+. $ENV_SETUP_DIR/bash_scripts/toggleHidden.sh
+. $ENV_SETUP_DIR/bash_scripts/authentication.sh #sets up ck and nk
+. $ENV_SETUP_DIR/bash_scripts/nice_man.sh
+. $ENV_SETUP_DIR/bash_scripts/ssh-with-check.sh
+
+
 
 # Make python nicer:
 export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
 
-# Make screen nicer
-if [ x"$(readlink ~/.screenrc)" != x$ENV_SETUP_DIR/gnuscreen/screenrc ]
-then
-	if [ -e ~/.screenrc ]
-	then
-		echo "Backing up your ~/.screenrc to use my own."
-		mv ~/.screenrc ~/.screenec.backup
-	fi
-	ln -s $ENV_SETUP_DIR/gnuscreen/screenrc ~/.screenrc
-fi
+. $ENV_SETUP_DIR/gnuscreen/setup_screen.sh
