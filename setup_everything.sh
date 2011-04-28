@@ -75,7 +75,6 @@ alias delete='/bin/rm'
 . $ENV_SETUP_DIR/bash_scripts/toggleHidden.sh
 . $ENV_SETUP_DIR/bash_scripts/authentication.sh #sets up ck and nk
 . $ENV_SETUP_DIR/bash_scripts/nice_man.sh
-. $ENV_SETUP_DIR/bash_scripts/ssh-with-check.sh
 
 
 
