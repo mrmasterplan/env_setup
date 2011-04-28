@@ -6,12 +6,12 @@ else
 	SCREENRC=$ENV_SETUP_DIR/gnuscreen/screenrc
 fi
 
-if [ x"$(readlink ~/.screenrc)" != x$SCREENRC ]
+if [ x"$(readlink ~/.screenrc)" != x"$SCREENRC" ]
 then
 	if [ -e ~/.screenrc ]
 	then
 		echo "Backing up your ~/.screenrc to use my own."
 		mv ~/.screenrc ~/.screenec.backup
 	fi
-	ln -s $SCREENRC ~/.screenrc
+	ln -s "$SCREENRC" ~/.screenrc
 fi

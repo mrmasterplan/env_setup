@@ -65,6 +65,8 @@ alias ttop='top -U $USER'
 if [ x"$LOCALNAME" == x"MyMacBookPro" ]; then
 	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 	. $ENV_SETUP_DIR/bash_scripts/checkntrash.sh
+else
+	alias emacs='emacs -nw'
 fi
 alias delete='/bin/rm'
 
