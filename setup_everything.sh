@@ -60,7 +60,7 @@ alias 'tree=tree -C'
 alias 'up=cd ..'
 alias 'find=find . -name'
 alias ttop='top -U $USER'
-
+ 
 
 #Stuff that is specifit to my Mac
 if [ x"$LOCALNAME" == x"MyMacBookPro" ]; then
