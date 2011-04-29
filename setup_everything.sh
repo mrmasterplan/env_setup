@@ -6,7 +6,8 @@ cd $(dirname $BASH_SOURCE)
 export ENV_SETUP_DIR="$(pwd -P)"
 cd $OLDDIR
 
-echo "Setting up your environment from $ENV_SETUP_DIR"
+echo -n "Setting up your environment from $ENV_SETUP_DIR at "
+date
 
 # [ x"$LOCALNAME" == x"MyMacBookPro" ] determines this to be my MBP
 
@@ -14,7 +15,7 @@ echo "Setting up your environment from $ENV_SETUP_DIR"
 # Set up the shell so that it behaves nicely
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
-export PS1="\u@\h \W> "
+export PS1="#\u@\h \W> "
 
 # Set up the ssh names of a number of frequently accessed resources
 export lxplus="heisterk@lxplus5.cern.ch"
@@ -65,6 +66,9 @@ alias ttop='top -U $USER'
 if [ x"$LOCALNAME" == x"MyMacBookPro" ]; then
 	alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 	. $ENV_SETUP_DIR/bash_scripts/checkntrash.sh
+	
+	. $ENV_SETUP_DIR/ssh/ssh-agent-setup.sh
+	
 else
 	alias emacs='emacs -nw'
 fi
@@ -78,7 +82,18 @@ alias delete='/bin/rm'
 . $ENV_SETUP_DIR/bash_scripts/authentication.sh #sets up ck and nk
 . $ENV_SETUP_DIR/bash_scripts/nice_man.sh
 
+#Make sure that boost is properly included
+# if [ x"$BOOST_ROOT" != x ]
+# then
+# 	export LIBPATH="$BOOST_ROOT/lib:$LIBPATH"
+# 	export LD_LIBRARY_PATH="$BOOST_ROOT/lib:$LD_LIBRARY_PATH"
+# 	export DYLD_LIBRARY_PATH="$BOOST_ROOT/lib:$DYLD_LIBRARY_PATH"
+# 	export PATH="$BOOST_ROOT:$PATH"
+# 	export CPLUS_INCLUDE_PATH="$BOOST_ROOT:$CPLUS_INCLUDE_PATH"
+# fi	
 
+#Make ssh nice
+#eval $(ssh-agent -s)
 
 # Make python nicer:
 export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
