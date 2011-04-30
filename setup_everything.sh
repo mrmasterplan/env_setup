@@ -6,8 +6,7 @@ cd $(dirname $BASH_SOURCE)
 export ENV_SETUP_DIR="$(pwd -P)"
 cd $OLDDIR
 
-echo -n "Setting up your environment from $ENV_SETUP_DIR at "
-date
+echo -n "Setting up your environment from $ENV_SETUP_DIR at "; date
 
 # [ x"$LOCALNAME" == x"MyMacBookPro" ] determines this to be my MBP
 

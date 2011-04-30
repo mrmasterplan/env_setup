@@ -1,4 +1,8 @@
 
+if [ ! -z "$VERBOSE" ]; then
+	echo "'rm' now uses trash functionality"
+fi
+
 function checkntrash {
     
     if [[ $(pwd -P) = /afs/* ]]

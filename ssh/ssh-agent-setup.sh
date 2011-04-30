@@ -10,6 +10,10 @@ then
 		#The ssh-agent is dead
 		#/bin/rm $SSH_AGENT_SETUP
 		echo "The ssh-agent is dead, you need to make a new one with sshagent"
+	else
+		if [ ! -z "$VERBOSE" ]; then
+			echo "Set up your ssh-agent with Pid $SSH_AGENT_PID"
+		fi
 	fi
 else
 	echo "The ssh-agent is dead, you need to make a new one with sshagent"
