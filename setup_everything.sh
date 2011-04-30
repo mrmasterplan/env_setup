@@ -92,9 +92,6 @@ alias delete='/bin/rm'
 # 	export CPLUS_INCLUDE_PATH="$BOOST_ROOT:$CPLUS_INCLUDE_PATH"
 # fi	
 
-#Make ssh nice
-#eval $(ssh-agent -s)
-
 # Make python nicer:
 export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
 

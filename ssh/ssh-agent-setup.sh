@@ -19,5 +19,6 @@ function sshagent {
 	ssh-agent >$SSH_AGENT_SETUP
 	eval "$(cat $SSH_AGENT_SETUP)"
 	ssh-add ~/.ssh/id_rsa.protected
-	ssh-add ~/.ssh/id_rsa
+	ssh-add ~/.ssh/id_rsa.git
+	ssh-add ~/.ssh/id_rsa.open
 }
