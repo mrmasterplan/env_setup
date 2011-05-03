@@ -80,16 +80,17 @@ alias delete='/bin/rm'
 . $ENV_SETUP_DIR/bash_scripts/toggleHidden.sh
 . $ENV_SETUP_DIR/bash_scripts/authentication.sh #sets up ck and nk
 . $ENV_SETUP_DIR/bash_scripts/nice_man.sh
+. $ENV_SETUP_DIR/bash_scripts/load_leveller.sh
 
 #Make sure that boost is properly included
-# if [ x"$BOOST_ROOT" != x ]
-# then
-# 	export LIBPATH="$BOOST_ROOT/lib:$LIBPATH"
-# 	export LD_LIBRARY_PATH="$BOOST_ROOT/lib:$LD_LIBRARY_PATH"
-# 	export DYLD_LIBRARY_PATH="$BOOST_ROOT/lib:$DYLD_LIBRARY_PATH"
-# 	export PATH="$BOOST_ROOT:$PATH"
-# 	export CPLUS_INCLUDE_PATH="$BOOST_ROOT:$CPLUS_INCLUDE_PATH"
-# fi	
+if [ ! -z "$BOOST_ROOT" ]
+then
+	export LIBPATH="$BOOST_ROOT/lib:$LIBPATH"
+	export LD_LIBRARY_PATH="$BOOST_ROOT/lib:$LD_LIBRARY_PATH"
+	export DYLD_LIBRARY_PATH="$BOOST_ROOT/lib:$DYLD_LIBRARY_PATH"
+	export PATH="$BOOST_ROOT:$PATH"
+	export CPLUS_INCLUDE_PATH="$BOOST_ROOT/include:$CPLUS_INCLUDE_PATH"
+fi	
 
 # Make python nicer:
 export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
