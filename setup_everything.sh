@@ -52,14 +52,17 @@ alias 'lsa=ls -A'
 alias 'mv=mv -i'
 alias 'purge=rm -f *~ .*~ #* *#'
 alias 'purgeall=purge;purgetex;purgemf'
-alias 'purgetex=rm -if *.toc *.aux *.log'
+alias 'purgetex=rm -if *.toc *.aux *.log *.mtc *.mtc0 *.maf'
 alias 't=tree'
 alias 'td=tree -d'
 alias 'tree=tree -C'
 alias 'up=cd ..'
 alias 'find=find . -name'
 alias ttop='top -U $USER'
- 
+
+if [ -z "$(which tree)" ]; then
+	alias "tree=find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+fi 
 
 #Stuff that is specifit to my Mac
 if [ x"$LOCALNAME" == x"MyMacBookPro" ]; then
@@ -81,6 +84,8 @@ alias delete='/bin/rm'
 . $ENV_SETUP_DIR/bash_scripts/authentication.sh #sets up ck and nk
 . $ENV_SETUP_DIR/bash_scripts/nice_man.sh
 . $ENV_SETUP_DIR/bash_scripts/load_leveller.sh
+. $ENV_SETUP_DIR/bash_scripts/sframe_utility.sh
+
 
 #Make sure that boost is properly included
 if [ ! -z "$BOOST_ROOT" ]
@@ -94,5 +99,6 @@ fi
 
 # Make python nicer:
 export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
+export PYTHONPATH="$ENV_SETUP_DIR/python/:$PYTHONPATH"
 
 . $ENV_SETUP_DIR/gnuscreen/setup_screen.sh
