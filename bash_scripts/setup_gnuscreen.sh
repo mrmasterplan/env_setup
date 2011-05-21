@@ -1,5 +1,5 @@
 # Make screen nicer
-if [ x"$LOCALNAME" == x"MyMacBookPro" ]
+if [ x"$LOCALNAME" == x"SIMON_MBP" ]
 then
 	SCREENRC=$ENV_SETUP_DIR/gnuscreen/mac_screenrc
 else
@@ -11,7 +11,7 @@ then
 	if [ -e ~/.screenrc ]
 	then
 		echo "Backing up your ~/.screenrc to use my own."
-		mv ~/.screenrc ~/.screenec.backup
+		/bin/mv ~/.screenrc ~/.screenrc.backup
 	fi
 	ln -s "$SCREENRC" ~/.screenrc
 fi

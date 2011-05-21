@@ -16,4 +16,3 @@ function cleanemacs {
     done
 }
 
-alias ce="cleanemacs"
