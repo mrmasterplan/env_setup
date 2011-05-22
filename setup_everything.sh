@@ -94,10 +94,7 @@ function init {
 		alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 		#Set up the ssh-agent
 		sshagentenv
-		if [ "$(sshagentalive)" != "alive" ]
-		then
-			echo "The ssh-agent is dead, you need to make a new one with sshagent"
-		fi
+		sshagentalive
 	else
 		alias emacs='emacs -nw'
 	fi

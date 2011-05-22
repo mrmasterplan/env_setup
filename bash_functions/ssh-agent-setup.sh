@@ -19,27 +19,30 @@ if [ $LOCALNAME == "SIMON_MBP" ]; then
 			MyEnv="TRUE"
 			sshagentenv
 		fi
-	
+		retval=0
 		# if that didn't succeed, it's definitely dead.
 		if [ -z "$SSH_AGENT_PID" ]
 		then
-			echo "dead"
-			return 127
-		fi
-	
-		# now check if the process exists
-		if [ ! -z "$(ps -p $SSH_AGENT_PID 2>&1 | grep ssh-agent)" ]
-		then
-			echo "alive"
+			echo "The ssh-agent is dead, you need to make a new one with sshagent"
+			retval=127
 		else
-			echo "dead"
+			# now check if the process exists
+			if [ ! -z "$(ps -p $SSH_AGENT_PID 2>&1 | grep ssh-agent)" ]
+			then
+				echo "The ssh-agent is alive."
+				retval=0
+			else
+				echo "The ssh-agent is dead, you need to make a new one with sshagent"
+				retval=127
+			fi
 		fi
-	
+		
 		if $MyEnv; then
 			unset SSH_AUTH_SOCK
 			unset SSH_AGENT_PID
 			unset MyEnv
 		fi
+		return $retval
 	}
 
 	function sshagent {
