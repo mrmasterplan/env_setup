@@ -1,4 +1,4 @@
-if [ $LOCALNAME == "SIMON_MBP" ]; then
+if [ x$LOCALNAME == x"SIMON_MBP" ]; then
 
 	function journal {
 		mate ~/Documents/Journal/journal.tex

@@ -10,10 +10,10 @@ function setup_boost {
 	#Check if you even know what to do.
 	if [ -z "${BOOST_ROOT}" ]
 	then
-		if [ ${LOCALNAME} == "SIMON_MBP" ]
+		if [ x${LOCALNAME} == x"SIMON_MBP" ]
 		then
 			export BOOST_ROOT="/Users/simon/software/boost/boost_1_44_0"
-		elif [ ${LOCALNAME} == "MDJ_IMAC" ]
+		elif [ x${LOCALNAME} == x"MDJ_IMAC" ]
 		then 
 			export BOOST_ROOT="/Developer/boost_1_44_0"
 		elif [ -e /software/hep/boost/1.46.1 ]
