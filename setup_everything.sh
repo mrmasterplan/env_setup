@@ -7,7 +7,7 @@ export ENV_SETUP_DIR="$(pwd -P)"
 cd $OLDDIR
 
 
-if [ ! -z "$(which ifconfig)" -a ! -z "$(which md5)" ] ; then
+if [ ! -z "$(which ifconfig 2>/dev/null)" -a ! -z "$(which md5 2>/dev/null)" ] ; then
 	Mac_Adr_Hash="$(ifconfig | grep lladdr | sed 's/.*lladdr //' | md5 -q)"
 	if [ $Mac_Adr_Hash == "1ec48be6ee2d4027d78da2a9360dd922" ];then
         export LOCALNAME="SIMON_MBP" 
