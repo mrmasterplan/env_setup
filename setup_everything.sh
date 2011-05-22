@@ -79,7 +79,6 @@ function init {
 	alias 'tree=tree -C'
 	alias 'up=cd ..'
 	alias ttop='top -U $USER'
-	alias rm='checkntrash'
 	alias ce="cleanemacs"
 	
 	export myrepo="file:///afs/cern.ch/project/svn/reps/reposheisterk"

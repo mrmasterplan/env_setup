@@ -14,4 +14,7 @@ then
 	        trash $@
 	    fi
 	}
+	
+	alias rm='checkntrash'
+	
 fi
