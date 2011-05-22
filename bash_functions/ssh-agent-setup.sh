@@ -14,6 +14,7 @@ if [ $LOCALNAME == "SIMON_MBP" ]; then
 	# check if the environment is still relevent
 	function sshagentalive {
 		#if the ssh-agent environment isn't present, set it up
+		MyEnv=""
 		if [ -z "$SSH_AGENT_PID" ]
 		then
 			MyEnv="TRUE"
@@ -37,7 +38,7 @@ if [ $LOCALNAME == "SIMON_MBP" ]; then
 			fi
 		fi
 		
-		if $MyEnv; then
+		if [ ! -z $MyEnv ]; then
 			unset SSH_AUTH_SOCK
 			unset SSH_AGENT_PID
 			unset MyEnv
