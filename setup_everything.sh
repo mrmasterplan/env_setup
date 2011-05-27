@@ -84,7 +84,7 @@ function init {
 	export myrepo="file:///afs/cern.ch/project/svn/reps/reposheisterk"
 	
 	
-	if [ -z "$(which tree)" ]; then
+	if [ -z "$(which tree 2>/dev/null)" ]; then
 		alias "tree=find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 	fi 
 
@@ -102,7 +102,7 @@ function init {
 	#Make sure that boost is properly included
 	setup_boost
 	
-	setup_sframe
+	#setup_sframe
 	
 	# Make python nicer:
 	export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
