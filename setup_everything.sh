@@ -5,7 +5,7 @@ OLDDIR=$PWD
 cd $(dirname $BASH_SOURCE)
 export ENV_SETUP_DIR="$(pwd -P)"
 cd $OLDDIR
-
+unset OLDDIR
 
 if [ ! -z "$(which ifconfig 2>/dev/null)" -a ! -z "$(which md5 2>/dev/null)" ] ; then
 	Mac_Adr_Hash="$(ifconfig | grep lladdr | sed 's/.*lladdr //' | md5 -q)"

@@ -1,11 +1,14 @@
 
 function setup_boost {
 	#Check if there is anything to do
-	if [ ! -z "${BOOST_ROOT}" -a ! -z "$(echo $LIBPATH | grep $BOOST_ROOT)" ];
-	then
-		echo "BOOST is already set up."
-		return 127
-	fi
+	if [ ! -z "${BOOST_ROOT}" ]
+    then
+        if [ ! -z "$(echo $LIBPATH | grep $BOOST_ROOT)" ];
+        then
+        	echo "BOOST is already set up."
+        	return 127
+        fi
+    fi
 	
 	#Check if you even know what to do.
 	if [ -z "${BOOST_ROOT}" ]
