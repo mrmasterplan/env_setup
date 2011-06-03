@@ -1,11 +1,14 @@
 #!/bin/bash
 
 #Find out where you are, so you know where to import from.
-OLDDIR=$PWD
+previous_PWD=$PWD
+previous_OLDPWD=$OLDPWD
 cd $(dirname $BASH_SOURCE)
 export ENV_SETUP_DIR="$(pwd -P)"
-cd $OLDDIR
-unset OLDDIR
+cd $previous_PWD
+OLDPWD=$previous_OLDPWD
+unset previous_PWD
+unset previous_OLDPWD
 
 if [ ! -z "$(which ifconfig 2>/dev/null)" -a ! -z "$(which md5 2>/dev/null)" ] ; then
 	Mac_Adr_Hash="$(ifconfig | grep lladdr | sed 's/.*lladdr //' | md5 -q)"
@@ -14,6 +17,7 @@ if [ ! -z "$(which ifconfig 2>/dev/null)" -a ! -z "$(which md5 2>/dev/null)" ] ;
 	elif [ x$Mac_Adr_Hash == x"8f1e89697003bd87af5f43f9e78ce4d8" ];then
 		export LOCALNAME="MDJ_IMAC"
 	fi
+	unset Mac_Adr_Hash
 fi
 
 # Set up the shell so that it behaves nicely

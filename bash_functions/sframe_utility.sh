@@ -23,6 +23,12 @@ function setup_sframe {
 	. setup.sh
 	cd $PREVDIR
 	unset PREVDIR
+	
+	if [ -e ~/code/SFrame_meta_tools/setup.sh ]
+		then
+		source ~/code/SFrame_meta_tools/setup.sh
+	fi
+	
 	return 0
 }
 
