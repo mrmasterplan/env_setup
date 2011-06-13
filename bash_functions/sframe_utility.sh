@@ -17,12 +17,13 @@ function setup_sframe {
 			return 127
 		fi
 	fi
-	PREVDIR=$PWD
+	local PREVDIR=$PWD
+	local PREVOLDPWD=$OLDPWD
 	cd $SFRAME_DIR
 	unset SFRAME_DIR
 	. setup.sh
 	cd $PREVDIR
-	unset PREVDIR
+	export OLDPWD=$PREVOLDPWD
 	
 	if [ -e ~/code/SFrame_meta_tools/setup.sh ]
 		then

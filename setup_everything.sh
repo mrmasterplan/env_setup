@@ -23,7 +23,7 @@ fi
 # Set up the shell so that it behaves nicely
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
-export PS1="#\u@\h \W> "
+PS1="#\u@\h \W> "
 
 #Pure function definitions. No environment is set
 for i in $ENV_SETUP_DIR/bash_functions/*.sh
