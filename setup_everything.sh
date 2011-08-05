@@ -42,19 +42,15 @@ function init {
 	
 
 	# Set up the ssh names of a number of frequently accessed resources
-	export lxplus="heisterk@lxplus5.cern.ch"
 	export pcnbi1="heisterk@pcnbi1.cern.ch"
 	export heppc="simonhe@heppc19.nbi.dk"
 	export steno1="simonhe@fend01.dcsc.ku.dk"
 	export steno2="simonhe@fend02.dcsc.ku.dk"
 	export wgserv=$steno2
-	export cernvm="192.168.100.132"
-	export top="simonhe@top.nbi.dk"
-	export mdjmac="simon@imac.mdj.dk"
 
-	alias lx='ssh -X -Y $lxplus'
-	alias mac='ssh -X -Y $mdjmac'
-	alias wg="ssh -X -Y $wgserv"
+	alias lx='ssh -X -Y lxplus'
+	alias mac='ssh -X -Y mdj'
+	alias wg="ssh -X -Y fend02"
 	alias ll='ls -lG'
 	alias root='root -l'
 	alias '2up=psnup -pa4 -2'
@@ -84,6 +80,13 @@ function init {
 	alias 'up=cd ..'
 	alias ttop='top -U $USER'
 	alias ce="cleanemacs"
+	
+	if  command -v checkntrash &>/dev/null
+		then
+		alias rm='checkntrash'
+	fi
+	
+	alias astyle="astyle -n -A10 -r *.cxx *.h *.C"
 	
 	export myrepo="file:///afs/cern.ch/project/svn/reps/reposheisterk"
 	

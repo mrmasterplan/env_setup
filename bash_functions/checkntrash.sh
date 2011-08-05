@@ -15,6 +15,6 @@ then
 	    fi
 	}
 	
-	alias rm='checkntrash'
+	# alias rm='checkntrash'
 	
 fi

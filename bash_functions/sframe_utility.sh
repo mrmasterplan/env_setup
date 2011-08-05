@@ -1,6 +1,11 @@
 
 function setup_sframe {
 	
+	if  command -v env-watcher &>/dev/null
+		then
+		env-watcher -f start sframe
+	fi
+	
 	if [ ! -z "${SFRAME_DIR}" -a ! -z "${SFRAME_LIB_PATH}" ];
 	then
 		echo "SFrame is already set up."
@@ -25,10 +30,16 @@ function setup_sframe {
 	cd $PREVDIR
 	export OLDPWD=$PREVOLDPWD
 	
-	if [ -e ~/code/SFrame_meta_tools/setup.sh ]
+	if [ -e ~/software/SFrame_meta_tools/setup.sh ]
 		then
-		source ~/code/SFrame_meta_tools/setup.sh
+		source ~/software/SFrame_meta_tools/setup.sh
 	fi
+	
+	if  command -v env-watcher &>/dev/null
+		then
+		env-watcher -f stop sframe
+	fi
+	
 	
 	return 0
 }
