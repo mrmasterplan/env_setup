@@ -24,6 +24,7 @@ fi
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 PS1="#\u@\h \W> "
+# PS1="\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] "
 
 #Pure function definitions. No environment is set
 for i in $ENV_SETUP_DIR/bash_functions/*.sh

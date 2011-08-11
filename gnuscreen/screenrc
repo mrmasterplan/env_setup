@@ -3,3 +3,9 @@ startup_message off
 escape ^Pp
 vbell off
 autodetach on
+
+hardstatus on
+
+hardstatus alwayslastline
+
+hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a"
