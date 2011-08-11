@@ -1,7 +1,7 @@
 # Set up the ssh-agent so that it is available on every shell on this system
 if [ x$LOCALNAME == x"SIMON_MBP" ]; then
     #The location to save the output of ssh-agent, i.e. the environment for the ssh-agent
-    export SSH_AGENT_SETUP="$ENV_SETUP_DIR/sshagent_setup"
+    export SSH_AGENT_SETUP="$ENV_SETUP_DIR/sshagent_setup.tmp"
 
     # set up the environment from an existing environemt setup file
     function sshagentenv {
