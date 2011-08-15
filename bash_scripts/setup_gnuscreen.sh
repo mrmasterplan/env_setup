@@ -15,3 +15,7 @@ then
 	fi
 	ln -s "$SCREENRC" ~/.screenrc
 fi
+
+if [ ! -d $HOME/log/screen-logs ]; then
+	mkdir -p $HOME/log/screen-logs
+fi
