@@ -1,4 +1,21 @@
 # Set up the ssh-agent so that it is available on every shell on this system
+#Find out where you are, so you know where to import from.
+if [ x$ENV_SETUP_DIR == x ]; then
+	previous_PWD=$PWD
+	previous_OLDPWD=$OLDPWD
+	cd $(dirname $BASH_SOURCE)
+	cd ..
+	export ENV_SETUP_DIR="$(pwd -P)"
+	cd $previous_PWD
+	OLDPWD=$previous_OLDPWD
+	unset previous_PWD
+	unset previous_OLDPWD
+fi
+
+if [ "x$LOCALNAME" == x ]; then
+	source $ENV_SETUP_DIR/tools/get_locale.sh
+fi
+
 if [ x$LOCALNAME == x"SIMON_MBP" ]; then
     #The location to save the output of ssh-agent, i.e. the environment for the ssh-agent
     export SSH_AGENT_SETUP="$ENV_SETUP_DIR/sshagent_setup.tmp"
@@ -14,7 +31,7 @@ if [ x$LOCALNAME == x"SIMON_MBP" ]; then
     # check if the environment is still relevent
     function sshagentalive {
         #if the ssh-agent environment isn't present, set it up
-        MyEnv=""
+        local MyEnv=""
         if [ -z "$SSH_AGENT_PID" ]
         then
             MyEnv="TRUE"
@@ -41,7 +58,6 @@ if [ x$LOCALNAME == x"SIMON_MBP" ]; then
         if [ ! -z $MyEnv ]; then
             unset SSH_AUTH_SOCK
             unset SSH_AGENT_PID
-            unset MyEnv
         fi
         return $retval
     }
