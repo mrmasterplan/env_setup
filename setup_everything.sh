@@ -18,15 +18,18 @@ bind '"\e[B"':history-search-forward
 PS1="#\u@\h \W> "
 # PS1="\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] "
 
-#Pure function definitions. No environment is set
-for i in $ENV_SETUP_DIR/bash_functions/*.sh
-do
-	source $i
-done
+
 
 
 function init {
 	echo -n "Setting up your environment from $ENV_SETUP_DIR at "; date
+	
+	#Pure function definitions. No environment is set
+    for i in $ENV_SETUP_DIR/bash_functions/*.sh
+    do
+    	source $i
+    done
+    
 	#Environment setup
 	for i in $ENV_SETUP_DIR/bash_scripts/*.sh
 	do
@@ -79,7 +82,7 @@ function init {
 		alias rm='checkntrash'
 	fi
 	
-	alias astyle="astyle -n -A10 -r *.cxx *.h *.C"
+	alias astyle="astyle -n -A10 -r *.cxx *.h *.C *.icc *.c"
 	
 	export myrepo="file:///afs/cern.ch/project/svn/reps/reposheisterk"
 	

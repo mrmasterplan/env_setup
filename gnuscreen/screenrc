@@ -7,10 +7,10 @@ autodetach on
 defscrollback 5000
 deflog on
 
-logfile $HOME/log/screen-logs/%Y%m%d-%n.log
+#logfile $HOME/log/screen-logs/%Y%m%d-%n.log
 
-hardstatus on
+#hardstatus on
 
-hardstatus alwayslastline
+#hardstatus alwayslastline
 
-hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a"
+#hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a"

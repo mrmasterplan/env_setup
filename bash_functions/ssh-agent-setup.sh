@@ -70,5 +70,13 @@ if [ x$LOCALNAME == x"SIMON_MBP" ]; then
         ssh-add ~/.ssh/id_rsa.git
         ssh-add ~/.ssh/id_rsa.open
     }
-
+    
+    # function env_setup_check_and_kill_ssh_agent {
+    #     if command -v bash_count &>/dev/null; then
+    #       local count=$(bash_count)
+    #       if [ $count -le 0 ]; then
+    #           ssh-agent -k
+    #           fi
+    #   fi
+    # }
 fi
