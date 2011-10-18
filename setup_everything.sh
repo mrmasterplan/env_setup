@@ -96,15 +96,12 @@ function init {
 	if [ x"$LOCALNAME" == x"SIMON_MBP" ]; then
 		#setup emacs
 		alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-		#Set up the ssh-agent
-        # sshagentenv
-        # sshagentalive
 	else
 		alias emacs='emacs -nw'
 	fi
 
 	#Make sure that boost is properly included
-	setup_boost
+    # setup_boost
 	
 	#setup_sframe
 	
