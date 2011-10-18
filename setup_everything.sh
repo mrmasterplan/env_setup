@@ -76,18 +76,20 @@ function init {
 	alias 'up=cd ..'
 	alias ttop='top -U $USER'
 	alias ce="cleanemacs"
+	alias rootcompile="$(root-config --cxx) $(root-config --cflags) $(root-config --libs)"
 	
 	if  command -v checkntrash &>/dev/null
 		then
 		alias rm='checkntrash'
+		alias del='/bin/rm'
 	fi
 	
-	alias astyle="astyle -n -A10 -r *.cxx *.h *.C *.icc *.c"
+	alias astyle_all="astyle -n -A10 -r *.cxx *.h *.C *.icc *.c"
 	
-	export myrepo="file:///afs/cern.ch/project/svn/reps/reposheisterk"
+	export MYREPO="file:///afs/cern.ch/project/svn/reps/reposheisterk"
 	
 	
-	if [ -z "$(which tree 2>/dev/null)" ]; then
+	if ! which tree &>/dev/null; then # if the tree command is not found,
 		alias "tree=find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 	fi 
 
@@ -95,12 +97,11 @@ function init {
 		#setup emacs
 		alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 		#Set up the ssh-agent
-		sshagentenv
-		sshagentalive
+        # sshagentenv
+        # sshagentalive
 	else
 		alias emacs='emacs -nw'
 	fi
-	alias delete='/bin/rm'
 
 	#Make sure that boost is properly included
 	setup_boost

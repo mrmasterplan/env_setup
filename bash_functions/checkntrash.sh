@@ -1,8 +1,4 @@
 
-if [ ! -z "$VERBOSE" ]; then
-	echo "'rm' now uses trash functionality"
-fi
-
 if [ -e /usr/bin/trash ]
 then
 	function checkntrash {
