@@ -15,9 +15,10 @@ function setup_sframe {
 	if [ -z "${SFRAME_DIR}" ]
 	then
 		if [ -e $HOME/software/SFrame/trunk/setup.sh ]
-		then 
+		    then 
 			SFRAME_DIR=$HOME/software/SFrame/trunk
 		elif [ -e $HOME/software/SFrame/setup.sh ]
+		    then
 		    SFRAME_DIR=$HOME/software/SFrame
 		else
 			echo "SFRAME_DIR not set."
