@@ -90,7 +90,7 @@ function init {
 	
 	
 	if ! which tree &>/dev/null; then # if the tree command is not found,
-		alias "tree=find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+		alias "tree=find . -print | grep -v '/\.' | sed -e 's;[^/]*/;|-- ;g;s;-- |;   |;g'"
 	fi 
 
 	if [ x"$LOCALNAME" == x"SIMON_MBP" ]; then
