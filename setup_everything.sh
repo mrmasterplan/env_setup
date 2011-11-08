@@ -109,5 +109,10 @@ function init {
 	export PYTHONSTARTUP="$ENV_SETUP_DIR/python/pystartup.py"
 	export PYTHONPATH="$ENV_SETUP_DIR/python/:$PYTHONPATH"
 
+    if [ -e ~/software/EnvWatcher/setup.sh ]
+        then
+        source ~/software/EnvWatcher/setup.sh
+    fi
+
 	unset init
 }
