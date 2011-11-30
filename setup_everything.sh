@@ -15,7 +15,8 @@ source $ENV_SETUP_DIR/tools/get_locale.sh
 # Set up the shell so that it behaves nicely
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
-PS1="#\u@\h \W> "
+# PS1="#\u@\h \W> "
+PS1="\$(date +%H:%M) \h \W> "
 # PS1="\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] "
 
 
