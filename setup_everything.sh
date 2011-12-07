@@ -38,16 +38,6 @@ function init {
 	done
 	
 
-	# Set up the ssh names of a number of frequently accessed resources
-	export pcnbi1="heisterk@pcnbi1.cern.ch"
-	export heppc="simonhe@heppc19.nbi.dk"
-	export steno1="simonhe@fend01.dcsc.ku.dk"
-	export steno2="simonhe@fend02.dcsc.ku.dk"
-	export wgserv=$steno2
-
-	alias lx='ssh -X -Y lxplus'
-	alias mac='ssh -X -Y mdj'
-	alias wg="ssh -X -Y fend02"
 	alias ll='ls -lG'
 	alias root='root -l'
 	alias '2up=psnup -pa4 -2'
