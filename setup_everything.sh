@@ -16,7 +16,8 @@ source $ENV_SETUP_DIR/tools/get_locale.sh
 bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 # PS1="#\u@\h \W> "
-PS1="\$(echo $STY | sed 's/[0-9]*\.\(.*\)/[\1] /g')\$(date +%H:%M) \h \W> "
+PS1="\$(date +%H:%M) \h \W> "
+# PS1="\$(echo $STY | sed 's/[0-9]*\.\(.*\)/[\1] /g')\$(date +%H:%M) \h \W> "
 # results in: "[screen name] 12:35 host dirbase> "
 # PS1="\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] "
 
@@ -106,5 +107,6 @@ function init {
         source ~/software/EnvWatcher/setup.sh
     fi
 
+    update_prompt
 	unset init
 }
