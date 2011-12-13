@@ -1,6 +1,6 @@
 termcapinfo xterm* ti@:te@
 startup_message off
-escape ^Pp
+escape ^Nn
 vbell off
 autodetach on
 
