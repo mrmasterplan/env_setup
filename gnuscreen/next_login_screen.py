@@ -36,4 +36,4 @@ elif attached_sessions:
     index = attached_sessions[-1].index + 1
 else:
     index=0
-os.system("screen -RR login_%d" % index)
+os.system("screen -RR login_%d -c ~/.env_setup/gnuscreen/screenrc_fend02_login" % index)
