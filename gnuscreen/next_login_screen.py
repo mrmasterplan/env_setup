@@ -1,39 +1,21 @@
 #!/usr/bin/env python
 
-import os, re
-from commands import getoutput
+import os, sys, re, commands
+screenls = commands.getoutput("screen -ls")
 
-session_base="login_"
-screenls=getoutput("screen -ls")
 
-class screen:
-    pass
+# problem, if there are more than one screens of the best index name, we should choose one of them.
+# we need to save the full name as well as the index.
+query="""\t(?P<full>[0-9]+\.login_(?P<index>[0-9]+))\t\(%s\)"""
 
-sessions={}
-detached_sessions=[]
-attached_sessions=[]
+detached=[(int(match.group("index")), match.group("full")) for match in re.finditer(query%"Detached",screenls)]
+attached=[(int(match.group("index")), match.group("full")) for match in re.finditer(query%"Attached",screenls)]
 
-for match in re.finditer("""\t(?P<pid>[0-9]+)\.(?P<name>login_(?P<index>[0-9]+))\t(?P<status>\(.*?\))""",screenls):
-    # print "found index",match.group("index"),"called",match.group("name"),"with status",match.group("status")
-    index=int(match.group("index"))
-    s=screen()
-    s.status=match.group("status")
-    s.index=index
-    s.name=match.group("name")
-    s.pid=match.group("pid")
-    sessions[index]=s
-    if s.status=="(Detached)":
-        detached_sessions.append(s)
-    elif s.status=="(Attached)":
-        attached_sessions.append(s)
-
-detached_sessions.sort(lambda a,b: cmp(a.index,b.index))
-attached_sessions.sort(lambda a,b: cmp(a.index,b.index))
-
-if detached_sessions:
-    index = detached_sessions[0].index
-elif attached_sessions:
-    index = attached_sessions[-1].index + 1
+if detached:
+    name = min(detached)[1]
+elif attached:
+    name ="login_%d"%( max(attached)[0] + 1)
 else:
-    index=0
-os.system("screen -RR login_%d -c ~/.env_setup/gnuscreen/screenrc_fend02_login" % index)
+    name ="login_0"
+    
+sys.exit(os.system("screen -RR %s -c ~/.env_setup/gnuscreen/screenrc_fend02_login" % name))

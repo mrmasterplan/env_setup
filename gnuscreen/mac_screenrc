@@ -1,5 +1,7 @@
 termcapinfo xterm* ti@:te@
 startup_message off
+# escape ^\\
+# escape ^]]
 escape ^Oo
 vbell off
 autodetach on
