@@ -1,8 +1,10 @@
 termcapinfo xterm* ti@:te@
 startup_message off
-# escape ^\\
+
+# this is the top level screenrc.
+escape ^\\
 # escape ^]]
-escape ^Oo
+# escape ^Oo
 vbell off
 autodetach on
 
