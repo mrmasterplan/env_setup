@@ -4,7 +4,7 @@ import os, sys, re, commands
 screenls = commands.getoutput("screen -ls")
 
 
-screenr="~/.env_setup/gnuscreen/screenrc_fend02_login"
+screenrc="~/.env_setup/gnuscreen/screenrc_fend02_login"
 
 if len(sys.argv) > 1:
     screenrc=sys.argv[1]
