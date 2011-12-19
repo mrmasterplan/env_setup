@@ -3,24 +3,22 @@
 import os, sys, re, commands
 screenls = commands.getoutput("screen -ls")
 
-
-screenrc="~/.env_setup/gnuscreen/screenrc_fend02_login"
-
+screenrc=""
 if len(sys.argv) > 1:
-    screenrc=sys.argv[1]
+    screenrc= "-c "+os.path.expanduser(os.path.expandvars(sys.argv[1]))
 
-# problem, if there are more than one screens of the best index name, we should choose one of them.
-# we need to save the full name as well as the index.
+# shell = "-s "+os.environ["SHELL"]
+
 query="""\t(?P<full>[0-9]+\.login_(?P<index>[0-9]+))\t\(%s\)"""
 
-detached=[(int(match.group("index")), match.group("full")) for match in re.finditer(query%"Detached",screenls)]
-attached=[(int(match.group("index")), match.group("full")) for match in re.finditer(query%"Attached",screenls)]
+detached=[int(match.group("index")) for match in re.finditer(query%"Detached",screenls)]
+attached=[int(match.group("index")) for match in re.finditer(query%"Attached",screenls)]
 
+index = 0
 if detached:
-    name = min(detached)[1]
+    index = min(detached)
 elif attached:
-    name ="login_%d"%( max(attached)[0] + 1)
-else:
-    name ="login_0"
-    
-sys.exit(os.system("screen -RR %s -c %s" % (name,screenrc)))
+    index = max(attached) +1
+
+name ="login_%d"%index
+os.system("screen %s -RR %s"%(screenrc,name))
