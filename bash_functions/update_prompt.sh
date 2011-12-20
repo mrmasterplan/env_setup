@@ -28,7 +28,7 @@ function update_prompt {
     
     if [ ! -z "$STY" ]; then
         echo -ne "\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\007"
-        echo -ne "\\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\\a"
+        # echo -ne "\\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\\a"
     fi
 }
 
