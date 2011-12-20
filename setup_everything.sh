@@ -21,7 +21,7 @@ PS1="\$(date +%H:%M) \h \W> "
 # PS1='$(echo $STY | sed "s/[0-9]*\.\(.*\)/[\1] /g")$(date +%H:%M) \h \W> ' # I now have the screen name in the window title.
 # PROMPT_COMMAND='[ ! -z "$STY" ] && echo -ne "\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\007"'
 
-PS1="\$( [ ! -z "$STY" ] && echo  '\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\a')\$(date +%H:%M) \\h \\W> "
+# PS1="\$( [ ! -z "$STY" ] && echo  '\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\a')\$(date +%H:%M) \\h \\W> "
 
 # PS1="\$( [ ! -z "$STY" ] && (echo  '\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g"))\a')\$(date +%H:%M) \\h \\W> "
 #only is the variable STY is non-zero do you putput the control characters, followed by the crunched STY, then more control charactse.
