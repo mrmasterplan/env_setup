@@ -117,6 +117,6 @@ function init {
         source ~/software/EnvWatcher/setup.sh
     fi
 
-    # update_prompt
+    update_prompt
 	unset init
 }

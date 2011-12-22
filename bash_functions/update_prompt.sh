@@ -20,14 +20,18 @@
 # }
 
 function update_prompt {
-    local pid=$(echo $STY | sed 's/^\([0-9][0-9]*\)\..*/\1/')
-    local new_STY="$(screen -ls | grep --color=no -o "$pid[^[:space:]]*")"
-    if [ "${new_STY:0:${#pid}}" == "$pid" ]; then
-        export STY="$new_STY"
+    local pid=$(echo $STY | egrep -o "^[0-9][0-9]*")
+    if [ ! -z "$pid" ]; then
+        local new_STY="$(screen -ls | grep --color=no -o "$pid[^[:space:]]*")"
+        if [ "${new_STY:0:${#pid}}" == "$pid" ]; then
+            export STY="$new_STY"
+        fi
     fi
-    
+        
     if [ ! -z "$STY" ]; then
-        echo -ne "\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\007"
+        local sess_name="${STY##*.}"
+        # echo -ne "\033]0;$sess_name@${HOSTNAME%%.*}\007"
+        echo -ne "\033]0;$sess_name\007"
         # echo -ne "\\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\\a"
     fi
 }

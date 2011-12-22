@@ -21,4 +21,6 @@ elif attached:
     index = max(attached) +1
 
 name ="login_%d"%index
-os.system("screen %s -RR %s"%(screenrc,name))
+command="screen %s -RR %s"%(screenrc,name)
+# os.system(command)
+os.execvp("screen",command.split())
