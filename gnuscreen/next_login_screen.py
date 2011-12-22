@@ -7,20 +7,23 @@ screenrc=""
 if len(sys.argv) > 1:
     screenrc= "-c "+os.path.expanduser(os.path.expandvars(sys.argv[1]))
 
-# shell = "-s "+os.environ["SHELL"]
+base_name="login_"
 
-query="""\t(?P<full>[0-9]+\.login_(?P<index>[0-9]+))\t\(%s\)"""
-
+# find attached or detached sceen sessions:
+query="""\t(?P<full>[0-9]+\."""+base_name+"""(?P<index>[0-9]+))\t\(%s\)"""
 detached=[int(match.group("index")) for match in re.finditer(query%"Detached",screenls)]
 attached=[int(match.group("index")) for match in re.finditer(query%"Attached",screenls)]
 
-index = 0
 if detached:
+    # use the lowest free index
     index = min(detached)
 elif attached:
+    # or extend the list by one
     index = max(attached) +1
+else:
+    # or start a new list
+    index=0
 
-name ="login_%d"%index
-command="screen %s -RR %s"%(screenrc,name)
-# os.system(command)
+command="screen %s -RR %s%d"%(screenrc,base_name,index)
+# pass control to screen:
 os.execvp("screen",command.split())
