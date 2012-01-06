@@ -1,14 +1,7 @@
 #!/bin/bash
 
 #Find out where you are, so you know where to import from.
-previous_PWD=$PWD
-previous_OLDPWD=$OLDPWD
-cd $(dirname $BASH_SOURCE)
-export ENV_SETUP_DIR="$(pwd -P)"
-cd $previous_PWD
-OLDPWD=$previous_OLDPWD
-unset previous_PWD
-unset previous_OLDPWD
+export ENV_SETUP_DIR="$( cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )"
 
 source $ENV_SETUP_DIR/tools/get_locale.sh
 
