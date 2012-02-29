@@ -10,7 +10,7 @@ bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
 # PS1="#\u@\h \W> "
-PS1="\$(date +%H:%M) \h \W> "
+PS1="#\$(date +%H:%M) \h \W> "
 # PS1='$(echo $STY | sed "s/[0-9]*\.\(.*\)/[\1] /g")$(date +%H:%M) \h \W> ' # I now have the screen name in the window title.
 # PROMPT_COMMAND='[ ! -z "$STY" ] && echo -ne "\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\007"'
 
@@ -82,7 +82,7 @@ function init {
 	
 	alias astyle_all="astyle -n -A10 -r *.cxx *.h *.C *.icc *.c"
 	
-	export MYREPO="file:///afs/cern.ch/project/svn/reps/reposheisterk"
+	export MYREPO="svn+ssh://heisterk@svn.cern.ch/reps/reposheisterk"
 	
 	
 	if ! which tree &>/dev/null; then # if the tree command is not found,
