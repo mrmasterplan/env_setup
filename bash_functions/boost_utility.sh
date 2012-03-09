@@ -15,7 +15,7 @@ function setup_boost {
 	then
 		if [ x${LOCALNAME} == x"SIMON_MBP" ]
 		then
-			export BOOST_ROOT="/Users/simon/software/boost/boost_1_44_0"
+			export BOOST_ROOT="/Users/simon/software/boost/boost_1_48_0"
 		elif [ x${LOCALNAME} == x"MDJ_IMAC" ]
 		then 
 			export BOOST_ROOT="/Developer/boost_1_44_0"
