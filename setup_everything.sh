@@ -10,8 +10,8 @@ bind '"\e[A"':history-search-backward
 bind '"\e[B"':history-search-forward
 
 # PS1="#\u@\h \W> "
-# PS1="#\$(date +%H:%M) \h \W> "
-PS1="\$(if (exit \$?); then echo \\033[m; else echo \\033[1m; fi)#\$(date +%H:%M) \h \W> \\033[m"
+PS1="#\$(date +%H:%M) \h \W> "
+# PS1="\$(if (exit \$?); then echo \\033[m; else echo \\033[1m; fi)#\$(date +%H:%M) \h \W> \\033[m"
 
 # PS1='$(echo $STY | sed "s/[0-9]*\.\(.*\)/[\1] /g")$(date +%H:%M) \h \W> ' # I now have the screen name in the window title.
 # PROMPT_COMMAND='[ ! -z "$STY" ] && echo -ne "\033]0;$(echo $STY | sed "s/[0-9]*\.\(.*\)/\1/g")\007"'

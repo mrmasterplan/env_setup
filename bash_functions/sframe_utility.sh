@@ -1,34 +1,48 @@
 
+function setdown_sframe {
+    if [ -z "$SFRAME_DIR" ]; then 
+        return 0; 
+    fi
+    
+    export PATH="$(echo $PATH | sed "s@$SFRAME_DIR/bin:*@@g")"
+    export PYTHONPATH="$(echo $PYTHONPATH | sed "s@$SFRAME_DIR/python:*@@g")"
+    export PAR_PATH="$(echo $PATH | sed "s@$SFRAME_DIR/lib:*@@g")"
+    export DYLD_LIBRARY_PATH="$(echo $PATH | sed "s@$SFRAME_DIR/lib:*@@g")"
+    unset SFRAME_LIB_PATH
+    unset SFRAME_BIN_PATH
+    unset SFRAME_DIR
+}
+
 function setup_sframe {
 	
-	if  command -v env-watcher &>/dev/null
-		then
-		env-watcher -f start sframe
+	
+	if [ ! -z "${SFRAME_DIR}" ];
+	then
+		echo "SFrame is already set up to $SFRAME_DIR. Removing it"
+		setdown_sframe
 	fi
 	
-	if [ ! -z "${SFRAME_DIR}" -a ! -z "${SFRAME_LIB_PATH}" ];
-	then
-		echo "SFrame is already set up."
-		return 127
-	fi
-	
-	if [ -z "${SFRAME_DIR}" ]
-	then
-		if [ -e $HOME/software/SFrame/trunk/setup.sh ]
-		    then 
-			SFRAME_DIR=$HOME/software/SFrame/trunk
-		elif [ -e $HOME/software/SFrame/setup.sh ]
-		    then
-		    SFRAME_DIR=$HOME/software/SFrame
-		else
-			echo "SFRAME_DIR not set."
-			return 127
-		fi
-	fi
+	for sframe in ./SFrame ../SFrame $HOME/software/SFrame/ $HOME/software/SFrame/SFrame_trunk
+	do
+	    if [ -e $sframe/setup.sh ];
+	        then
+	        if [ ! -z "$(cd $sframe; . setup.sh &>/dev/null; echo \$SFRAME_DIR)" ]
+	            then
+	            break
+            fi
+        fi
+    done
+    
+    if [ -z "$sframe" ]
+        then
+        echo "Could not find SFrame!"
+        return 127
+    fi
+    echo "Setting up SFrame from $(cd $sframe; pwd)"
+    
 	local PREVDIR=$PWD
 	local PREVOLDPWD=$OLDPWD
-	cd $SFRAME_DIR
-	unset SFRAME_DIR
+	cd $sframe
 	. setup.sh
 	cd $PREVDIR
 	export OLDPWD=$PREVOLDPWD
@@ -38,12 +52,6 @@ function setup_sframe {
 		source ~/software/SFrame_meta_tools/setup.sh
 	fi
 	
-	if  command -v env-watcher &>/dev/null
-		then
-		env-watcher -f stop sframe
-	fi
-	
-	
 	return 0
 }
 
@@ -51,3 +59,5 @@ function clean_sframe {
 	make distclean
 	/bin/rm -r jobTempOutput_*
 }
+
+

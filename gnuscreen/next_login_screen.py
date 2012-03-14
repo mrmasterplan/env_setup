@@ -8,6 +8,15 @@ screenrc=""
 if len(sys.argv) > 1:
     screenrc= "-c "+os.path.expanduser(os.path.expandvars(sys.argv[1]))
 
+# try:
+#     import commands
+#     if hash(commands.getoutput("ifconfig |grep ether")) == -6887383610360975116:
+#         base_name="login_"
+#     else:
+#         import socket
+#         base_name = socket.gethostname().split(".")[0]+"_"
+# except:
+#     base_name="login_"
 base_name="login_"
 
 # find attached or detached sceen sessions:
