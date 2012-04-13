@@ -9,11 +9,14 @@ def main():
     print screenls
     
     waitforsimilar()
+    while time.time()-t0<2:
+            time.sleep(0.1)
     
     newscreenls = commands.getoutput("screen -ls")
     if newscreenls!= screenls:
         # t0 = time.time()
-        print screenls
+        print newscreenls
+        screenls = newscreenls
     
     screenrc=""
     if len(sys.argv) > 1:
@@ -43,35 +46,62 @@ def main():
     
     print "%s%d"%(base_name,index)
     
-    while time.time()-t0<2:
-        time.sleep(0.1)
     command="screen %s -RR %s%d"%(screenrc,base_name,index)
     # pass control to screen:
     os.execvp("screen",command.split())
 
 
 def waitforsimilar():
-    import os, commands, re, time
-    pid = os.getpid()
+    import os, commands, re, time, random
+    mypid = os.getpid()
     
     pspat = re.compile(r""" *(?P<pid>\d+) +(((?P<days>\d+)-)?(?P<hours>\d{2}):)?(?P<time>\d{2}:\d{2}) (?P<command>.*)""")
     
-    match=pspat.search(commands.getoutput("ps xo pid,etime,command -p %d"%pid))
+    match=pspat.search(commands.getoutput("ps xo pid,etime,command -p %d"%mypid))
     mycommand = hash(match.group("command"))
     mytime = makefloattime(match)
     
-    psout=commands.getoutput("ps axo pid,etime,command")
-    for match in pspat.finditer(psout):
-        if hash(match.group("command")) == mycommand:
-            if int(match.group("pid"))==pid:
+    lastbbs=[]
+    lastequals=[]
+    waited=0
+    patience=2.
+    step=0.2
+    while 1:
+        bbs=[]
+        equals=[]
+        psout = commands.getoutput("ps axo pid,etime,command")
+        # print psout
+        mytime = makefloattime(re.search(r""" *%d +(((?P<days>\d+)-)?(?P<hours>\d{2}):)?(?P<time>\d{2}:\d{2}) (?P<command>.*)"""%(mypid),psout))
+        for match in pspat.finditer(psout):
+            if hash(match.group("command")) == mycommand:
+                pid=int(match.group("pid"))
+                if pid==mypid:
+                    continue
+                if makefloattime(match) > mytime:
+                    # print "Found bb:"
+                    # print match.group(0)
+                    bbs=1
+                    break
+                if makefloattime(match) == mytime:
+                    # print "Found equal:"
+                    # print match.group(0)
+                    
+                    equals+=[pid]
+        # found the list of big brothers.
+        if bbs:
+            time.sleep(step)
+            continue
+        if equals:
+            if set(equals) != set(lastequals):
+                lastequals=equals
+                time.sleep(step)
                 continue
-            if makefloattime(match) >= mytime:
-                # found a big_brother. better wait for him.
-                # print "Found a big brother with following process line:"
-                # print match.group(0)
-                time.sleep(0.2)
-                return waitforsimilar()
-    return # there seem to be no more big brothers
+            else:
+                #we are waiting for the same equals as last time.
+                # get impatient.
+                if random.random()<0.1:
+                    return
+        return
 
 def makefloattime(match):
     time = 60. * int(match.group("time")[:2]) + int(match.group("time")[-2:])
