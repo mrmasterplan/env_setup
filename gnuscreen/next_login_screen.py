@@ -5,18 +5,13 @@ def main():
     import os, sys, re, commands, time
     t0 = time.time()
     
-    screenls = commands.getoutput("screen -ls")
-    print screenls
+    os.system("screen -ls")
     
     waitforsimilar()
     while time.time()-t0<2:
             time.sleep(0.1)
     
-    newscreenls = commands.getoutput("screen -ls")
-    if newscreenls!= screenls:
-        # t0 = time.time()
-        print newscreenls
-        screenls = newscreenls
+    screenls = commands.getoutput("screen -ls")
     
     screenrc=""
     if len(sys.argv) > 1:
@@ -56,24 +51,23 @@ def waitforsimilar():
     mypid = os.getpid()
     
     pspat = re.compile(r""" *(?P<pid>\d+) +(((?P<days>\d+)-)?(?P<hours>\d{2}):)?(?P<time>\d{2}:\d{2}) (?P<command>.*)""")
-    
-    match=pspat.search(commands.getoutput("ps xo pid,etime,command -p %d"%mypid))
-    mycommand = hash(match.group("command"))
+    mypspat=re.compile(r""" *%d +(((?P<days>\d+)-)?(?P<hours>\d{2}):)?(?P<time>\d{2}:\d{2}) (?P<command>.*)"""%(mypid))
+    psout=commands.getoutput("ps xo pid,etime,command")
+    match=mypspat.search(psout)
+    mycommand = match.group("command")
+    # print "mycommand:", mycommand
     mytime = makefloattime(match)
     
-    lastbbs=[]
     lastequals=[]
-    waited=0
-    patience=2.
     step=0.2
     while 1:
         bbs=[]
         equals=[]
         psout = commands.getoutput("ps axo pid,etime,command")
         # print psout
-        mytime = makefloattime(re.search(r""" *%d +(((?P<days>\d+)-)?(?P<hours>\d{2}):)?(?P<time>\d{2}:\d{2}) (?P<command>.*)"""%(mypid),psout))
+        mytime = makefloattime(mypspat.search(psout))
         for match in pspat.finditer(psout):
-            if hash(match.group("command")) == mycommand:
+            if match.group("command") == mycommand:
                 pid=int(match.group("pid"))
                 if pid==mypid:
                     continue
