@@ -8,6 +8,7 @@ startup_message off
 escape ^Oo
 vbell off
 autodetach on
+defutf8 on
 
 defscrollback 5000
 deflog off
