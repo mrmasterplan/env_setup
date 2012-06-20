@@ -27,16 +27,23 @@ PS1="#\$(date +%H:%M) \h \W> "
 # PS1="\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] "
 
 
-
+if [ ! -z "$STY" ];
+    then
+        echo "==================="
+        screen -ls
+        echo "==================="
+        echo "This is $STY"
+        echo "==================="
+    fi
 
 function init {
 	echo -n "Setting up your environment from $ENV_SETUP_DIR at "; date
 	
 	#Pure function definitions. No environment is set
     for i in $ENV_SETUP_DIR/bash_functions/*.sh
-    do
-    	source $i
-    done
+        do
+        	source $i
+        done
     
 	#Environment setup
 	for i in $ENV_SETUP_DIR/bash_scripts/*.sh
