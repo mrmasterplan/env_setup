@@ -36,6 +36,8 @@ if [ ! -z "$STY" ];
         echo "==================="
     fi
 
+export HISTIGNORE="anon-shell*:   *"
+
 function init {
 	echo -n "Setting up your environment from $ENV_SETUP_DIR at "; date
 	
@@ -51,6 +53,7 @@ function init {
 		source $i
 	done
 	
+
 
 	alias ll='ls -lG'
 	alias root='root -l'
