@@ -88,8 +88,11 @@ function init {
 	
 	if  command -v checkntrash &>/dev/null
 		then
-		alias rm='checkntrash'
-		alias del='/bin/rm'
+    		if [ x"$(uname)" == "xDarwin" ]
+    		    then
+    		        alias rm='checkntrash'
+    		        alias del='/bin/rm'
+    		    fi
 	fi
 	
 	alias astyle_all="astyle -n -A10 -r *.cxx *.h *.C *.icc *.c"
