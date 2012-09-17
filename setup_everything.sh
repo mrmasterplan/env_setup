@@ -36,7 +36,7 @@ if [ ! -z "$STY" ];
         echo "==================="
     fi
 
-export HISTIGNORE="anon-shell*:   *"
+export HISTIGNORE="*anon-shell*:   *:history"
 
 function init {
 	echo -n "Setting up your environment from $ENV_SETUP_DIR at "; date

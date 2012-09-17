@@ -1,16 +1,12 @@
 
-if [ -e /usr/bin/trash ]
-then
-	function checkntrash {
-    
-	    if [[ $(pwd -P) = /afs/* ]]
-	    then
-	        /bin/rm $@
-	    else
-	        trash $@
-	    fi
-	}
-	
-	# alias rm='checkntrash'
-	
-fi
+function checkntrash {
+
+    if [[ $(pwd -P) = /afs/* ]]
+    then
+        /bin/rm $@
+    else
+        $ENV_SETUP_DIR/bin/trash.py $@
+    fi
+}
+
+# alias rm='checkntrash'
